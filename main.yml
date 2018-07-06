@@ -1,0 +1,6 @@
+    - hosts: servers
+      roles:
+        - geerlingguy.gogs
+					gogs_http_port: "8080"
+
+
