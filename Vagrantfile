@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
     # supporte tags: 'install', 'test'
     #
-    # ansible.tags = ['test']
-    # ansible.skip_tags = ['install']
+    #ansible.tags = ['test']
+    #ansible.skip_tags = ['install']
 	end
 end

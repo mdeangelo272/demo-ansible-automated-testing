@@ -8,9 +8,17 @@
   assert:
     that:
       - "response.status == 200"
-      - " dsfadsfadsf in response.content"
-      - false
+      - "'2016 Gogs Version' in response.content"
   ignore_errors: yes
 
-- name: Run After
-  debug: msg="{{ response }}"
+- name: Run Which mysql
+  command: which mysql
+  changed_when: false
+  register: result
+- name: Validate MySQL Exists
+  fail: 
+    msg: 'Could not find MySQL'
+  when: "'no mysql' in result.stdout"
+  ignore_errors: yes
+
+
