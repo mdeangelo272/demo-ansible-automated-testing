@@ -49,3 +49,16 @@ This is a sample project to demonstrate different technologies and best practice
 An overview of how to implement automated tests to validate the state of systems provisioned using Ansible including best practices, common pitfalls, and various framework options.
 
 
+# Setup
+ansible-galaxy install -r requirements.yml
+
+## Raw
+* form data
+```
+db_type=MySQL&db_host=127.0.0.1%3A3306&db_user=gogs_db&db_passwd=gogs_db&db_name=gogs&ssl_mode=disable&db_path=data%2Fgogs.db&app_name=Gogs%3A+Go+Git+Service&repo_root_path=%2Fhome%2Fgit%2Fgogs-repositories&run_user=git&domain=localhost&ssh_port=22&http_port=3000&app_url=http%3A%2F%2Flocalhost%3A3000%2F&log_root_path=%2Fhome%2Fgit%2Fgogs%2Flog&smtp_host=&smtp_from=&smtp_email=&smtp_passwd=&enable_captcha=on&admin_name=&admin_passwd=&admin_confirm_passwd=&admin_email=
+
+```
+
+* Molecule
+  * docker python lib changes with ansible version at 2.6
+  * see molecule config file

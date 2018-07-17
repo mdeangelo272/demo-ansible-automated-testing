@@ -1,6 +1,20 @@
-    - hosts: servers
-      roles:
-        - geerlingguy.gogs
-					gogs_http_port: "8080"
+- hosts: all
+  become: yes
+  vars:
+    gogs_use_mysql: yes
+    gogs_db_username: gogs_db
+    gogs_db_password: gogs_db
 
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+      changed_when: false
 
+    - name: Ensure build dependencies are installed.
+      package: name=curl state=present
+
+  roles:
+    - geerlingguy.git
+    - geerlingguy.mysql
+    - geerlingguy.gogs
