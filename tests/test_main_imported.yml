@@ -1,0 +1,7 @@
+---
+- name: Imported Tests NOT Tagged
+  debug: msg="Imported Test NOT Tagged"
+
+- name: Imported Tests Tagged
+  debug: msg="Imported Test Tagged"
+  tags: ['test']

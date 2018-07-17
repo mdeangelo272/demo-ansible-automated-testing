@@ -1,0 +1,16 @@
+---
+- name: Get Home Page
+  uri:
+    url: "http://127.0.0.1:3000"
+    return_content: yes
+  register: response
+- name: Validate Home Page Response
+  assert:
+    that:
+      - "response.status == 200"
+      - " dsfadsfadsf in response.content"
+      - false
+  ignore_errors: yes
+
+- name: Run After
+  debug: msg="{{ response }}"

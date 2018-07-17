@@ -5,28 +5,25 @@
     gogs_use_mysql: yes
     gogs_db_username: gogs_db
     gogs_db_password: gogs_db
-    roles: 
-      - geerlingguy.git
-      - geerlingguy.mysql
-      - geerlingguy.gogs
 
   pre_tasks:
-    - name: Update apt cache.
-      apt: update_cache=yes cache_valid_time=600
-      when: ansible_os_family == 'Debian'
-      changed_when: false
-
     - name: Ensure build dependencies are installed.
       package: name=curl state=present
+      tags: ['install']
 
-  roles: 
-    - geerlingguy.git
-    - geerlingguy.mysql
-    - geerlingguy.gogs
-
-
-- name: Run Tests
-  hosts: all
   tasks: 
+    - include_role:
+        name: "{{ item }}"
+      with_items: 
+        - geerlingguy.git
+        - geerlingguy.mysql
+        - geerlingguy.gogs
+      tags: ['install']
 
-
+  post_tasks:
+    - include_tasks: "tests/test_main_included.yml"
+      tags: ['test']
+    - import_tasks: "tests/test_main_imported.yml"
+      tags: ['test']
+    - import_tasks: "tests/test_main.yml"
+      tags: ['test']

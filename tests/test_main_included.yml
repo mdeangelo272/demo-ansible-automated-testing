@@ -1,0 +1,7 @@
+---
+- name: Included Tests NOT Tagged
+  debug: msg="Included Test NOT Tagged"
+
+- name: Included Tests Tagged
+  debug: msg="Included Test Tagged"
+  tags: ['test']

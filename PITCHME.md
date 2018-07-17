@@ -1,5 +1,46 @@
 ## Introduction
 
+* Automated testing has been a pattern in software development for decades
+* With Infrastructure as Code and Configuration Management, the need has arisen for Automated tests of server configurations
+* There are many frameworks available to help implement automated tests
+
+## Why Implement Automated Tests
+
+* Automated tests help increase the robustness of your solutions
+* They reduce human error and increase repeatability
+* They decrease the time to validate system configurations
+* They ensure compliance across all nodes and workloads
+
+## Robust Playbook Primer
+
+* Use check mode as a sanity check
+* Use Block/Rescue statements for exception handling
+* Use the `wait_for` module to ensure that a port is active
+* Use the `meta` module to flush handlers when needed
+
+## Automated Tests Using Ansible
+* Ansible playbooks represent a declarative desired state, thus the successful execution of a task is a great indication of the state of the system
+* Use the `assert` module to ensure the state of the system
+* Use the `fail` module with a `when` condition to assert the state of a module
+
+## Common Pattern
+* register a variable that represents state
+    * Should **NOT** change the state of the system
+    * if you use `command` or `shell`, use `change_when: false` to ensure proper report
+* Validate state using the test module (`assert` or `fail`)
+  * it is recommend to use the `ignore_errors: yes` so that the entire test suite runs
+
+## How to organize your tests
+
+## Other Frameworks and Tools
+* Testing Frameworks
+    * Testinfra - Python
+    * goss - YAML
+    * InSpec - Ruby
+    * ServerSpec - Ruby
+* Orchestration Frameworks
+    * Molecule - Python 
+    * Kitchen - Ruby
 
 ---
 
@@ -7,35 +48,12 @@
 
 * email: iam@mdeangelo272.me
 * Website: https://mdeangelo272.me/
-* LinkedIn: https://www.linkedin.com/in/mdeangelo272/
 * GitHub: https://github.com/mdeangelo272
+* LinkedIn: https://www.linkedin.com/in/mdeangelo272/
 
 ---
 
-## Raw Notes
-* Testing Methods
-  * Using Ansible `assert` and `fail` modules
-    * register variables
-      * logic to capture data should **not** change state of system
-      * use `changed_when: false` to avoid erroneous changed count
-    * `assert` or `fail` based on registered data
-      * Continuing on failed asserts/tests to execute all tests
-      * use `ignore_errors: yes`
-      * #todo: mkd - settle on yes/no vs true/false
-
-  * Other Frameworks (As time permits)
-    * Inspec - ruby
-    * ServerSpec - ruby
-    * Testinfra - python
-
-* Where to test
-  * Vagrant and Kitchen
-  * Docker
-  * Public Cloud
-  * Actual infrastructure
-    
-
-* Best Practices
+* MISC Topics
   * How to lay out the tests
     * tasks vs playbooks
     * targeting servers
@@ -43,33 +61,3 @@
     * activating tests via tags, environment variables, etc
   * Test should not alter the state of the system in most cases
 * 
-* Gotchas
-  * include versus import and tags in the current version of Ansible
-* Refs
-  * [Ansible's Docs on Testing](https://docs.ansible.com/ansible/latest/reference_appendices/test_strategies.html)
-  * Look at Ansible's Source Code tests
-    * [Ansible Core Testing docs](https://docs.ansible.com/ansible/latest/dev_guide/testing.html)
-* Misc
-  * Testing custom modules is more important
-  * code hardening vs automated tests
-    * `wait_for` is a example of hardening
-
-
-## Presentation Summary
-An overview of how to implement automated tests to validate the state of systems provisioned using Ansible including best practices, common pitfalls, and various framework options.
-
-
-# Setup
-ansible-galaxy install -r requirements.yml
-
-## Raw
-* form data
-```
-db_type=MySQL&db_host=127.0.0.1%3A3306&db_user=gogs_db&db_passwd=gogs_db&db_name=gogs&ssl_mode=disable&db_path=data%2Fgogs.db&app_name=Gogs%3A+Go+Git+Service&repo_root_path=%2Fhome%2Fgit%2Fgogs-repositories&run_user=git&domain=localhost&ssh_port=22&http_port=3000&app_url=http%3A%2F%2Flocalhost%3A3000%2F&log_root_path=%2Fhome%2Fgit%2Fgogs%2Flog&smtp_host=&smtp_from=&smtp_email=&smtp_passwd=&enable_captcha=on&admin_name=&admin_passwd=&admin_confirm_passwd=&admin_email=
-
-```
-
-* Molecule
-  * docker python lib changes with ansible version at 2.6
-  * see molecule config file
-
