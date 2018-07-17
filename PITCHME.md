@@ -4,12 +4,16 @@
 * With Infrastructure as Code and Configuration Management, the need has arisen for Automated tests of server configurations
 * There are many frameworks available to help implement automated tests
 
+---
+
 ## Why Implement Automated Tests
 
 * Automated tests help increase the robustness of your solutions
 * They reduce human error and increase repeatability
 * They decrease the time to validate system configurations
 * They ensure compliance across all nodes and workloads
+
+---
 
 ## Robust Playbook Primer
 
@@ -18,10 +22,14 @@
 * Use the `wait_for` module to ensure that a port is active
 * Use the `meta` module to flush handlers when needed
 
+---
+
 ## Automated Tests Using Ansible
 * Ansible playbooks represent a declarative desired state, thus the successful execution of a task is a great indication of the state of the system
 * Use the `assert` module to ensure the state of the system
 * Use the `fail` module with a `when` condition to assert the state of a module
+
+---
 
 ## Common Pattern
 * register a variable that represents state
@@ -30,7 +38,7 @@
 * Validate state using the test module (`assert` or `fail`)
   * it is recommend to use the `ignore_errors: yes` so that the entire test suite runs
 
-## How to organize your tests
+---
 
 ## Other Frameworks and Tools
 * Testing Frameworks
