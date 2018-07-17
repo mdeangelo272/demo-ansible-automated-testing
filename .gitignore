@@ -1,0 +1,8 @@
+# vim
+*.sw*
+
+# vagrant
+.vagrant
+
+# ansible
+*.retry
