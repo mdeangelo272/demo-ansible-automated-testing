@@ -1,9 +1,14 @@
-- hosts: all
+- name: Install gogs
+  hosts: all
   become: yes
   vars:
     gogs_use_mysql: yes
     gogs_db_username: gogs_db
     gogs_db_password: gogs_db
+    roles: 
+      - geerlingguy.git
+      - geerlingguy.mysql
+      - geerlingguy.gogs
 
   pre_tasks:
     - name: Update apt cache.
@@ -14,7 +19,14 @@
     - name: Ensure build dependencies are installed.
       package: name=curl state=present
 
-  roles:
+  roles: 
     - geerlingguy.git
     - geerlingguy.mysql
     - geerlingguy.gogs
+
+
+- name: Run Tests
+  hosts: all
+  tasks: 
+
+
